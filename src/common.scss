@@ -1,0 +1,143 @@
+/**
+ * Author：tantingting
+ * Time：2018/9/3
+ * Description：Description
+ */
+
+/* clearfix */
+.clearfix:before,
+.clearfix:after {
+  content: "\20";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+a,a:hover,a:active,a:visited,a:link,a:focus{
+  color: #222;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-focus: none;
+  -moz-user-select: none;
+  outline:none;
+  background: none;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.contain {
+  width: 100%;
+}
+
+.flex-contain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  //background-color: #f5f5f5;
+  width: 100%;
+  height: 100%;
+
+  swiper {
+    height: 100%;
+  }
+
+  .flex-top {
+    /*height: 70rpx;*/
+    box-sizing: border-box;
+    background-color: #fff;
+    //margin-bottom: 18rpx;
+    //position: fixed;
+    //top: 0;
+    width: 100%;
+    //z-index: 999;
+    &:after {
+      display: block;
+      content: '';
+      background-color: #f5f5f5;
+      width: 100%;
+      height: 18rpx;
+    }
+  }
+  .flex-main {
+    flex: 1;
+    overflow: auto;
+    //-webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    //padding-top: 88rpx;
+    //padding-bottom: 115rpx;
+  }
+  .flex-bottom {
+    /*height: 100rpx;*/
+    //margin-top: 15rpx;
+    //position: fixed;
+    //bottom: 0;
+    //z-index: 999;
+    width:100%;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+}
+
+button {
+  // position:static;
+  display:block;
+  padding-left:0;
+  padding-right:0;
+  font-size:18rpx;
+  border-radius:0;
+  border: 0;
+  background-color:transparent;
+
+  &::after {
+    border: 0;
+  }
+}
+
+video {
+  display: block;
+}
+
+.scroll-view {
+  height: 100%;
+}
+
+.news-content {
+  .wxParse {
+    color: #222;
+    font-size: 36rpx;
+    line-height: 54rpx;
+
+    .a {
+      word-break:break-all;
+      color: #4298ba !important;
+    }
+
+    .p {
+      margin: 30rpx 0;
+    }
+
+    .blockquote {
+      background-color: transparent !important;
+    }
+  }
+}
+
+
