@@ -1,6 +1,6 @@
 <!-- 展示模板 -->
 <template>
-  <div class="custom-navigation">
+  <div class="custom-navigation" :style="{paddingTop: setTopHeight}">
     <div class="main">
       <div class="left" :style="{display: !showBack ? 'none' : 'flex'}">
         <div class="icon-box" @click="goBack">
@@ -19,11 +19,15 @@
 </template>
 
 <script>
+  import systerStore from '../store/syster'
   export default {
     props: ['title', 'showBack'],
     computed: {
       setTitle () {
         return !this.title ? '火星精选' : this.title
+      },
+      setTopHeight () {
+        return `${systerStore.state.statusBarHeight}px`
       }
     },
     methods: {

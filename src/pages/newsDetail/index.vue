@@ -27,6 +27,8 @@
         <div class="news-other">
           <!--精彩评论-->
           <reply :list="replyList" :hasMore="false"></reply>
+          <!--相关新闻-->
+          <related-news :list="RelatedNews"></related-news>
         </div>
         <!--打开app-->
         <button :style="{display: !openAppFlag ? 'none' : 'block'}" class="open-app" open-type="launchApp" app-parameter="wechat" @error="launchAppError">打开APP</button>
@@ -34,13 +36,13 @@
     </div>
     <!--回复-->
     <reply-flex type="news" :id="this.id" @callBack="getNewsReply"></reply-flex>
-    <!--<web-view :src="webViewUrl"></web-view>-->
   </div>
 </template>
 
 <script>
   import replyFlex from '@/components/reply-flex'
   import reply from '@/components/reply'
+  import relatedNews from '@/components/related-news'
   import store from './store'
   import wxParse from 'mpvue-wxparse'
   import {getTimeContent} from '../../utils/index'
@@ -82,6 +84,10 @@
       pageInfo () {
         return store.state.reply.pageInfo
       },
+      RelatedNews () {
+        console.log(store.state.RelatedNews)
+        return store.state.RelatedNews
+      },
       hasMoreReply () {
         let {pageCount, currentPage} = store.state.reply.pageInfo
         if (pageCount > currentPage) {
@@ -96,7 +102,8 @@
       replyFlex,
       reply,
       wxParse,
-      customNavigation
+      customNavigation,
+      relatedNews
     },
 
     methods: {
@@ -107,7 +114,15 @@
           currentPage: 1,
           ...obj
         }
-        store.dispatch('getNewsInfo', obj)
+        store.dispatch('getNewsInfo', obj).then((res) => {
+          let obj = res.current
+          let sendData = {
+            tags: obj.tags,
+            id: obj.id,
+            publishTime: obj.publishTime
+          }
+          store.dispatch('getRelatedNews', sendData)
+        })
       },
       getNewsReply (obj) {
         // store.commit('increment')
@@ -158,8 +173,6 @@
     },
     onShow () {
       let appInfo = getApp()
-      console.log('===123===')
-      console.log(appInfo.globalData.appOptions)
       let scene = appInfo.globalData.appOptions.scene
       this.scene = scene
       this.openApp(scene)

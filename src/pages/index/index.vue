@@ -42,6 +42,7 @@
   import videoStore from './videoStore'
   import store from './store'
   import loginStore from '../../store/login'
+  import systerStore from '../../store/syster'
 
   export default {
     data () {
@@ -208,6 +209,9 @@
       this.getVideoList({currentPage: 1})
       // 调用应用实例的方法获取全局数据
       this.getSetting()
+    },
+    mounted () {
+      systerStore.dispatch('setSysterInfo')
     },
 
     // 分享

@@ -112,8 +112,8 @@ const store = new Vuex.Store({
       storage: {
         getItem: key => wx.getStorageSync(key),
         setItem: (key, value) => wx.setStorageSync(key, value),
-        removeItem: () => {}
-        // removeItem: () => wx.clearStorage()
+        // removeItem: () => {}
+        removeItem: () => wx.clearStorage()
       }
     })
   ]

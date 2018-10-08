@@ -80,7 +80,7 @@ const store = new Vuex.Store({
       }
       ajax({
         type: 'get',
-        url: '/info/video/miniappvideo//getuservideolist',
+        url: '/info/video/miniappvideo/getuservideolist',
         // url: '/info/video/getvideolist',
         formData: false,
         params: {
@@ -90,7 +90,7 @@ const store = new Vuex.Store({
           console.log(res)
           if (res.code === 1) {
             // let list = !res.obj.inforList || !res.obj.inforList.length ? [] : res.obj.inforList
-            let list = res.obj
+            let list = !res.obj ? [] : res.obj
             list = [
               state.info,
               ...list

@@ -5,11 +5,13 @@ import {ajax} from '../../utils/index'
 Vue.use(Vuex)
 const GET_INFO = 'GET_VIDEO_INFO'
 const GET_REPLY = 'GET_VIDEO_REPLY'
+const GET_RELATE_NEWS = 'GET_RELATE_NEWS'
 
 const store = new Vuex.Store({
   state: {
     info: null,
     list: [],
+    RelatedNews: [],
     reply: {
       pageInfo: {
         currentPage: 1,
@@ -42,6 +44,9 @@ const store = new Vuex.Store({
           ...list
         ]
       }
+    },
+    [GET_RELATE_NEWS]: (state, list) => {
+      state.RelatedNews = list
     }
   },
   actions: {
@@ -57,7 +62,7 @@ const store = new Vuex.Store({
           },
           fn: function (res) {
             console.log(res)
-            resolve(res)
+            resolve(res.obj)
             if (res.code === 1) {
               commit(GET_INFO, {...res.obj})
             }
@@ -83,6 +88,29 @@ const store = new Vuex.Store({
           console.log(res)
           if (res.code === 1) {
             commit(GET_REPLY, {...res.obj, currentPage: sendData.currentPage})
+          }
+        }
+      })
+    },
+    getRelatedNews ({commit}, obj) {
+      let sendData = {
+        tags: '',
+        newsCount: 6,
+        id: '',
+        ...obj
+      }
+      ajax({
+        type: 'get',
+        url: '/info/news/relatednews',
+        formData: false,
+        params: {
+          ...sendData
+        },
+        fn: function (res) {
+          console.log(res)
+          if (res.code === 1) {
+            let list = !res.obj.inforList || !res.obj.inforList.length ? [] : res.obj.inforList
+            commit(GET_RELATE_NEWS, list)
           }
         }
       })

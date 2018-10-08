@@ -6,8 +6,8 @@
       <reply-item v-for="(item, index) in list" :key="index" :item="item.comment"></reply-item>
     </div>
     <div class="no-reply" :class="isShow">
-      <p>暂无回复内容</p>
-      <p>你来写一个吧~</p>
+      <img src="../img/icon-no-reply.png"/>
+      <div>还没有评论，<a href="/pages/index/main">去首页</a>看看热门内容</div>
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@
 <style scoped lang="scss">
   .reply-box {
     h2 {
-      color: #888;
+      color: #222;
       font-size: 28rpx;
       line-height: 66rpx;
       padding-left: 30rpx;
@@ -41,14 +41,29 @@
     }
 
     .no-reply {
-      height: 180rpx;
+      height: 340rpx;
       font-size: 26rpx;
-      color: #666;
+      color: #999;
       line-height: 40rpx;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      background-color: #fff;
+
+      img {
+        width: 127rpx;
+        height: 112rpx;
+      }
+
+      div {
+        display: flex;
+        margin-top: 25rpx;
+        a {
+          color: #0c7ff2;
+          margin-right: 10rpx;
+        }
+      }
 
       &.hide {
         display: none;
